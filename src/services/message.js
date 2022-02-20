@@ -5,11 +5,11 @@ export const createMessageDefineMaster = () => '#00#';
 export const createMessageSetNewMaster = (phoneNumber) => `#10#${phoneNumber}#`;
 
 // max 4 family's number
-export const createMessageAddFamilyNumber = (phoneNumber) => `#08#${phoneNumber}`;
+export const createMessageAddFamilyNumber = (phoneNumber) => `#08#${phoneNumber}#`;
 
 export const createMessageListAllFamilyNumbers = () => '#08#';
 
-export const createMessageDeleteFamilyNumber = (phoneNumber) => `#09#${phoneNumber}`;
+export const createMessageDeleteFamilyNumber = (phoneNumber) => `#09#${phoneNumber}#`;
 
 export const createMessageDeleteAllFamilyNumber = () => '#09#';
 
@@ -17,7 +17,7 @@ export const createMessageEnableAlertFamilyNumber = () => '#05#1#';
 
 export const createMessageDisableAlertFamilyNumber = () => '#05#0#';
 
-export const createMessageSwitchPassword = (previousPassword, newPassword) => `#11${previousPassword}#${newPassword}#`;
+export const createMessageSwitchPassword = (previousPassword, newPassword) => `#11#${previousPassword}#${newPassword}#`;
 
 export const createMessageGetTemperature = () => '#01#';
 
@@ -25,7 +25,7 @@ export const createMessageGetProbeTemperature = () => '#16#';
 
 export const createMessageEnableTemperatureAlert = () => '#02#1#';
 
-export const createMessageTemperatureRangeAlert = (min, max) => `#03#${min}#${max}`;
+export const createMessageTemperatureRangeAlert = (min, max) => `#03#${min}#${max}#`;
 
 export const createMessageDisableTemperatureAlert = () => '#02#0#';
 
@@ -42,7 +42,7 @@ export const createMessageProbeCheckAlert = () => '#16#';
  * HeureDébut et Heure Fin : sous la forme de 4 chiffres (hh :mm) sous le format 24h. HeureDébut et HeureFin doivent être le même jour
  */
 export const createMessageScheduleTemperatureAlert = (day, startTime, endTime, tempMin, tempMax, tempMin2, tempMax2) => {
-    return `#07#${day}#${startTime}#${endTime}#${tempMin}#${tempMax}#${tempMin2}#${tempMax2}`;
+    return `#07#${day}#${startTime}#${endTime}#${tempMin}#${tempMax}#${tempMin2}#${tempMax2}#`;
 };
 
 export const createMessageDisableScheduledTemperatureAlert = () => '#06#0#';
