@@ -7,9 +7,4 @@ export const sendSMS = async function(message){
         ['0606060606'],
         message,
     );
-    // .then(function(result){
-    //     console.log(`result: `, result);
-    // }).catch(function(error){
-    //     console.log(`error: `, error);
-    // });
 }

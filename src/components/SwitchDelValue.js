@@ -1,17 +1,27 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Switch, View, Text} from "react-native";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {createMessageDisableDel, createMessageEnableDel} from "../services/message";
+import localStorage from "../services/localStorage";
+
+const STORAGE_KEY = 'delActivate';
 
 export default function SwitchDelValue() {
     const [delValue, setDelValue] = useState(false);
+    useEffect(() => {
+        localStorage().getItem(STORAGE_KEY).then((value) => {
+            setDelValue(value);
+        })
+    }, [])
     const onDelValueChange = async (value) => {
         const message = value ? createMessageEnableDel() : createMessageDisableDel();
-        await sendSMS(message).then((response) => {
+        return sendSMS(message).then((response) => {
             if(response.result === CANCELLED_STATE){
                 return;
             }
-            setDelValue(value);
+            return localStorage().setItem(STORAGE_KEY, value).then(() => {
+                setDelValue(value);
+            });
         });
     }
 
