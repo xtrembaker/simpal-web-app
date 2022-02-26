@@ -5,6 +5,7 @@ import {View, Button, Switch} from "react-native";
 import FamilyNumbersPage from "./FamilyNumbersPage";
 import SwitchDelValue from "../components/SwitchDelValue";
 import SwitchPowerOutageValue from "../components/SwitchPowerOutageValue";
+import SwitchGsmLowSignalAlert from "../components/SwitchGsmLowSignalAlert";
 
 export default function SettingsPage({navigation}){
     return (
@@ -14,6 +15,7 @@ export default function SettingsPage({navigation}){
             <Button title="Numéros famille" onPress={() => navigation.navigate('FamilyNumbersPage')}/>
             <SwitchDelValue />
             <SwitchPowerOutageValue />
+            <SwitchGsmLowSignalAlert />
         </View>
     );
 }
