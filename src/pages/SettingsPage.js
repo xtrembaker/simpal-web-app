@@ -4,6 +4,7 @@ import ChangePassword from "../components/ChangePassword";
 import {View, Button, Switch} from "react-native";
 import FamilyNumbersPage from "./FamilyNumbersPage";
 import SwitchDelValue from "../components/SwitchDelValue";
+import SwitchPowerOutageValue from "../components/SwitchPowerOutageValue";
 
 export default function SettingsPage({navigation}){
     return (
@@ -12,6 +13,7 @@ export default function SettingsPage({navigation}){
             <ChangePassword/>
             <Button title="Numéros famille" onPress={() => navigation.navigate('FamilyNumbersPage')}/>
             <SwitchDelValue />
+            <SwitchPowerOutageValue />
         </View>
     );
 }

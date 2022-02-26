@@ -16,7 +16,7 @@ export default function SwitchDelValue() {
     }
 
     return (
-        <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginLeft: 50, marginRight: 50}}>
+        <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: 20, marginLeft: 50, marginRight: 50}}>
             <Text style={{fontSize: 18}}>Activer la LED</Text>
             <Switch onValueChange={onDelValueChange} value={delValue}></Switch>
         </View>
