@@ -1,5 +1,6 @@
 {
   "expo": {
+    "owner": "xtrembaker",
     "name": "simpal-web-app",
     "slug": "simpal-web-app",
     "version": "1.0.0",
