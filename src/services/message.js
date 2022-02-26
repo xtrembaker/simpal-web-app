@@ -13,9 +13,9 @@ export const createMessageDeleteFamilyNumber = (phoneNumber) => `#09#${phoneNumb
 
 export const createMessageDeleteAllFamilyNumber = () => '#09#';
 
-export const createMessageEnableAlertFamilyNumber = () => '#05#1#';
+export const createMessageEnableFamilyNumberAlert = () => '#05#1#';
 
-export const createMessageDisableAlertFamilyNumber = () => '#05#0#';
+export const createMessageDisableFamilyNumberAlert = () => '#05#0#';
 
 export const createMessageSwitchPassword = (previousPassword, newPassword) => `#11#${previousPassword}#${newPassword}#`;
 

@@ -1,6 +1,7 @@
 import {View, StyleSheet, TextInput} from "react-native";
 import {sendSMS} from "../services/sendSMS";
 import {createMessageAddFamilyNumber} from "../services/message";
+import SwitchFamilyNumberAlert from "../components/SwitchFamilyNumberAlert";
 
 const styles = StyleSheet.create({
     input: {
@@ -46,6 +47,7 @@ export default function FamilyNumbersPage(){
 
     return (
         <View>
+            <SwitchFamilyNumberAlert />
             {phoneNumberInputs.map(({id, placeholder}) => {
                 return (<TextInput
                     style={styles.input}
