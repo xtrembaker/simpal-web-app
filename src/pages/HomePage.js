@@ -1,10 +1,10 @@
 import { View, Button } from 'react-native';
 
-export default function HomePage() {
+export default function HomePage({navigation}) {
     return (
         <View>
-            <Button title="Sonde interne"/>
-            <Button title="Sonde externe"/>
+            <Button title="Sonde interne" onPress={() => navigation.navigate('InternalProbePage')}/>
+            <Button title="Sonde externe" onPress={() => navigation.navigate('ExternalProbePage')}/>
         </View>
     )
 }
