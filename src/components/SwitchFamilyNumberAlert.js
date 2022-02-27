@@ -4,17 +4,27 @@ import {
 } from "../services/message";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {Switch, Text, View} from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import localStorage from "../services/localStorage";
+
+const STORAGE_KEY = 'familyAlert'
 
 export default function SwitchFamilyNumberAlert(){
     const [familyNumberAlert, setFamilyNumberAlert] = useState(false);
+    useEffect(() => {
+        localStorage().getItem(STORAGE_KEY).then((value) => {
+            setFamilyNumberAlert(value);
+        })
+    })
     const onFamilyNumberAlert = async (value) => {
         const message = value ? createMessageEnableFamilyNumberAlert() : createMessageDisableFamilyNumberAlert();
         await sendSMS(message).then((response) => {
             if(response.result === CANCELLED_STATE){
                 return;
             }
-            setFamilyNumberAlert(value);
+            localStorage().setItem(STORAGE_KEY, value).then(() => {
+                setFamilyNumberAlert(value);
+            });
         });
     }
 
