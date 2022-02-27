@@ -2,7 +2,7 @@ import {View, StyleSheet, TextInput, Button} from "react-native";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {
     createMessageAddFamilyNumber, createMessageDeleteAllFamilyNumber,
-    createMessageDeleteFamilyNumber,
+    createMessageDeleteFamilyNumber, createMessageListAllFamilyNumbers,
 } from "../services/message";
 import SwitchFamilyNumberAlert from "../components/SwitchFamilyNumberAlert";
 import {useEffect, useState} from "react";
@@ -27,19 +27,15 @@ export default function FamilyNumbersPage(){
     const phoneNumberInputs = [
         {
             id: "15256287-612a-442a-b8b0-8fad08d0c0f1",
-            placeholder: "Numéro 1"
         },
         {
             id: "d4bc4119-b468-48b2-b5c0-4624373a6507",
-            placeholder: "Numéro 2"
         },
         {
             id: "807f950c-6d66-45ea-8e6e-785e5e5dada6",
-            placeholder: "Numéro 3"
         },
         {
             id: "075c7be0-7cb6-404f-935d-4fa521005574",
-            placeholder: "Numéro 4"
         }];
 
     useEffect(() => {
@@ -89,7 +85,10 @@ export default function FamilyNumbersPage(){
                 setFamilyNumbers([]);
             })
         })
+    }
 
+    const getRecordedFamilyNumbersOnDevice = () => {
+        return sendSMS(createMessageListAllFamilyNumbers());
     }
 
     const findNumberInCollectionById = (id) => {
@@ -103,13 +102,13 @@ export default function FamilyNumbersPage(){
     return (
         <View>
             <SwitchFamilyNumberAlert />
-            {phoneNumberInputs.map(({id, placeholder}) => {
+            {phoneNumberInputs.map(({id}) => {
                 return (
                     <View key={id}>
                         <TextInput
                             style={styles.input}
                             defaultValue={findNumberInCollectionById(id)}
-                            placeholder={placeholder}
+                            placeholder="Ajouter numéro famille"
                             keyboardType="phone-pad"
                             returnKeyType="done"
                             onSubmitEditing={({nativeEvent: {text}}) => onSubmitPhoneNumber(id, text)}
@@ -117,6 +116,7 @@ export default function FamilyNumbersPage(){
                         <Button title="Supprimer" onPress={() => onRemovePhoneNumber(id)}></Button>
                     </View>)
             })}
+            <Button title="Afficher les numéros enregistrés sur l’appareil" onPress={() => getRecordedFamilyNumbersOnDevice()}/>
             <Button title="Supprimer tous les numéros famille" onPress={() => onRemoveAllPhoneNumber()}/>
         </View>
     );
