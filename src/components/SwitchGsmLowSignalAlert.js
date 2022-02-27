@@ -4,17 +4,27 @@ import {
 } from "../services/message";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {Switch, Text, View} from "react-native";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import localStorage from "../services/localStorage";
+
+const STORAGE_KEY = 'gsmLowSignalAlert'
 
 export default function SwitchGsmLowSignalAlert(){
     const [gsmLowSignalValue, setGsmLowSignalValue] = useState(false);
+    useEffect(() => {
+        localStorage().getItem(STORAGE_KEY).then((value) => {
+            setGsmLowSignalValue(value);
+        })
+    });
     const onGsmLowSignalValueChange = async (value) => {
         const message = value ? createMessageEnableLowGsmSignalAlert() : createMessageDisableLowGsmSignalAlert();
         await sendSMS(message).then((response) => {
             if(response.result === CANCELLED_STATE){
                 return;
             }
-            setGsmLowSignalValue(value);
+            localStorage().setItem(STORAGE_KEY, value).then(() => {
+                setGsmLowSignalValue(value);
+            });
         });
     }
 
