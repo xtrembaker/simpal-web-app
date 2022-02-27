@@ -3,11 +3,8 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import {useEffect, useState} from "react";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {
-    createMessageDisableTemperatureAlert,
-    createMessageEnableTemperatureAlert,
     createMessageProbeDisableTemperatureAlert,
     createMessageProbeEnableTemperatureAlert, createMessageProbeTemperatureRangeAlert,
-    createMessageTemperatureRangeAlert
 } from "../services/message";
 import localStorage from "../services/localStorage";
 

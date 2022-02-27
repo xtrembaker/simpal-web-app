@@ -7,9 +7,10 @@ import SwitchDelValue from "../components/SwitchDelValue";
 import SwitchPowerOutageValue from "../components/SwitchPowerOutageValue";
 import SwitchGsmLowSignalAlert from "../components/SwitchGsmLowSignalAlert";
 import localStorage from "../services/localStorage";
+import ResetDefaultFactory from "../components/ResetDefaultFactory";
 
 export default function SettingsPage({navigation}){
-    const showAlert = () => Alert.alert(
+    const onResetApp = () => Alert.alert(
         'L’application va être réinitialisée',
         'Confirmer ?',
         [
@@ -36,7 +37,8 @@ export default function SettingsPage({navigation}){
             <SwitchDelValue />
             <SwitchPowerOutageValue />
             <SwitchGsmLowSignalAlert />
-            <Button title="Réinitialiser l’application" onPress={showAlert}/>
+            <Button title="Réinitialiser l’application" onPress={onResetApp}/>
+            <ResetDefaultFactory />
         </View>
     );
 }
