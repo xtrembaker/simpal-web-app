@@ -1,7 +1,7 @@
 import {View, StyleSheet, TextInput, Button} from "react-native";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {
-    createMessageAddFamilyNumber,
+    createMessageAddFamilyNumber, createMessageDeleteAllFamilyNumber,
     createMessageDeleteFamilyNumber,
 } from "../services/message";
 import SwitchFamilyNumberAlert from "../components/SwitchFamilyNumberAlert";
@@ -80,6 +80,18 @@ export default function FamilyNumbersPage(){
         })
     }
 
+    const onRemoveAllPhoneNumber = () => {
+        return sendSMS(createMessageDeleteAllFamilyNumber()).then((response) => {
+            if(response.result === CANCELLED_STATE){
+                return ;
+            }
+            return localStorage().removeItem(STORAGE_KEY).then(() => {
+                setFamilyNumbers([]);
+            })
+        })
+
+    }
+
     const findNumberInCollectionById = (id) => {
         const found = familyNumbers.find((item) => item.id === id)
         if(!found){
@@ -105,6 +117,7 @@ export default function FamilyNumbersPage(){
                         <Button title="Supprimer" onPress={() => onRemovePhoneNumber(id)}></Button>
                     </View>)
             })}
+            <Button title="Supprimer tous les numéros famille" onPress={() => onRemoveAllPhoneNumber()}/>
         </View>
     );
 };

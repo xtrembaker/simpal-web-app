@@ -9,6 +9,9 @@ export default function Storage() {
         async setItem(key, value) {
             return AsyncStorage.setItem(key, JSON.stringify(value));
         },
+        async removeItem(key) {
+            return AsyncStorage.removeItem(key);
+        },
         async reset(){
             return AsyncStorage.clear();
         }

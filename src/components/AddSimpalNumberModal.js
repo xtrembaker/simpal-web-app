@@ -56,15 +56,14 @@ const styles = StyleSheet.create({
 });
 
 export default function AddSimpalNumberModal(){
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
         getSimpalPhoneNumber().then((value) => {
-            setModalVisible(value === null);
+            setModalVisible(value === null || value);
         })
     }, []);
     const onSetSimpalPhoneNumber = async (number) => {
         return setSimpalPhoneNumber(number).then(() => {
-            console.log('setSimpalPhoneNumber', number);
             setModalVisible(false);
         });
     };
