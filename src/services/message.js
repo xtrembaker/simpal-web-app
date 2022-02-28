@@ -35,8 +35,6 @@ export const createMessageProbeTemperatureRangeAlert = (min, max) => `#17#${min}
 
 export const createMessageProbeDisableTemperatureAlert = () => '#16#0#';
 
-export const createMessageProbeCheckAlert = () => '#16#';
-
 /**
  * Jour : 0= tous les jours, 1 = Lundi, 2 = Mardi,... 8 = Lundi à Vendredi, 9 = Samedi à Dimanche
  * HeureDébut et Heure Fin : sous la forme de 4 chiffres (hh :mm) sous le format 24h. HeureDébut et HeureFin doivent être le même jour
