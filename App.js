@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Button } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import { Button } from 'react-native';
 import HomePage from "./src/pages/HomePage";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,11 +7,22 @@ import SettingsPage from "./src/pages/SettingsPage";
 import FamilyNumbersPage from "./src/pages/FamilyNumbersPage";
 import InternalProbePage from "./src/pages/InternalProbePage";
 import ExternalProbePage from "./src/pages/ExternalProbePage";
+import {getSimpalPhoneNumber} from "./src/services/simpalPhoneNumber";
+import WelcomePage from "./src/pages/WelcomePage";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
+    const [welcomePageDone, setWelcomePageDone] = useState(false);
+    useEffect(() => {
+        getSimpalPhoneNumber().then((value) => {
+            setWelcomePageDone(value !== null);
+        })
+    }, []);
+    if(!welcomePageDone){
+        return (<WelcomePage onDone={() => setWelcomePageDone(true)}/>)
+    }
+    return (
       <NavigationContainer>
           <Stack.Navigator>
               <Stack.Screen
