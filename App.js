@@ -14,13 +14,14 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
     const [welcomePageDone, setWelcomePageDone] = useState(false);
+    const [appReady, setAppReady] = useState(false);
     useEffect(() => {
         getSimpalPhoneNumber().then((value) => {
             setWelcomePageDone(value !== null);
         })
     }, []);
     if(!welcomePageDone){
-        return (<WelcomePage onDone={() => setWelcomePageDone(true)}/>)
+        return (<WelcomePage onDone={() => {setAppReady(true); setWelcomePageDone(true)}}/>)
     }
     return (
       <NavigationContainer>
@@ -28,6 +29,7 @@ export default function App() {
               <Stack.Screen
                   name="Home"
                   component={HomePage}
+                  initialParams={{appReady}}
                   options={({navigation}) => ({
                       title: 'Simpal T2',
                       headerRight: () => (
