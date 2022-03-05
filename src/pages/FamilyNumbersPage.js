@@ -7,6 +7,7 @@ import {
 import SwitchFamilyNumberAlert from "../components/SwitchFamilyNumberAlert";
 import {useEffect, useState} from "react";
 import localStorage from "../services/localStorage";
+import mainStyle from "../styles/main";
 
 const styles = StyleSheet.create({
     input: {
@@ -100,7 +101,7 @@ export default function FamilyNumbersPage(){
     }
 
     return (
-        <View>
+        <View style={mainStyle.pageContainer}>
             <SwitchFamilyNumberAlert />
             {phoneNumberInputs.map(({id}) => {
                 return (

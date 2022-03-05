@@ -6,6 +6,7 @@ import {useState} from "react";
 import {CANCELLED_STATE, sendSMS} from "../services/sendSMS";
 import {createMessageDefineMaster, createMessageSwitchPassword} from "../services/message";
 import PasswordInput from "../components/PasswordInput";
+import mainStyle from "../styles/main";
 
 export default function WelcomePage(props){
     const [showNext, setShowNext] = useState(false);
@@ -40,7 +41,6 @@ export default function WelcomePage(props){
         })
     };
 
-
     return (
         <Onboarding
             onDone={() => props.onDone}
@@ -52,7 +52,7 @@ export default function WelcomePage(props){
             pages={[
                 {
                     image: (
-                        <View style={{margin: 4, borderWidth: 0}}>
+                        <View>
                             <Text style={{textAlign: "center", fontSize: 35, marginBottom: 20}}>Bienvenue dans votre compagnon Simpal !</Text>
                             <Text style={{textAlign: "center", fontSize: 25, marginBottom: 0}}>Veuillez entrer le numéro de téléphone de l’appareil :</Text>
                             <PhoneNumberInput onSubmitEditing={({nativeEvent: {text}}) => onSetSimpalPhoneNumber(text)}/>
@@ -63,7 +63,7 @@ export default function WelcomePage(props){
                     backgroundColor: '#FFF',
                 },
                 {
-                    image: (<View style={{margin: 4}}>
+                    image: (<View>
                         <Text style={{fontSize: 25, textAlign: "center"}}>Définir ce téléphone comme{"\n"}étant le maitre ?</Text>
                         <View>
                             <Button title={"Oui"} onPress={() => onMasterPhoneDefined('yes')}/>
@@ -75,11 +75,11 @@ export default function WelcomePage(props){
                     backgroundColor: '#FFF',
                 },
                 {
-                    image: (<View style={{margin: 4}}>
+                    image: (<View>
                         <Text style={{fontSize: 25, textAlign: "center"}}>Définir un mot de passe{"\n"}pour l’appareil</Text>
                         <View>
-                            <PasswordInput placeholder={"Ancien"} onEndEditing={({nativeEvent: {text}}) => {setOldPassword(text); console.log('change password', text)}}/>
-                            <PasswordInput placeholder={"Nouveau"} onEndEditing={({nativeEvent: {text}}) => {setNewPassword(text); console.log('change password', text)}}/>
+                            <PasswordInput placeholder={"Ancien"} onEndEditing={({nativeEvent: {text}}) => {setOldPassword(text); }}/>
+                            <PasswordInput placeholder={"Nouveau"} onEndEditing={({nativeEvent: {text}}) => {setNewPassword(text);}}/>
                             <Button title={"Valider"} onPress={onChangePassword}/>
                         </View>
                     </View>),
@@ -88,8 +88,7 @@ export default function WelcomePage(props){
                     backgroundColor: '#FFF',
                 }
             ]}
-            imageContainerStyles={{paddingBottom: 10}}
-            containerStyles={{color: '#FFCC00', marginTop: -60}}
+            containerStyles={mainStyle.pageContainer}
         />
     );
 }

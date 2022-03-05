@@ -8,6 +8,7 @@ import SwitchPowerOutageValue from "../components/SwitchPowerOutageValue";
 import SwitchGsmLowSignalAlert from "../components/SwitchGsmLowSignalAlert";
 import localStorage from "../services/localStorage";
 import ResetDefaultFactory from "../components/ResetDefaultFactory";
+import mainStyle from "../styles/main";
 
 export default function SettingsPage({navigation}){
     const onResetApp = () => Alert.alert(
@@ -30,7 +31,7 @@ export default function SettingsPage({navigation}){
     )
 
     return (
-        <View>
+        <View style={mainStyle.pageContainer}>
             <Button title="Définir ce téléphone comme étant le maitre" onPress={async() => await sendSMS(createMessageDefineMaster())}/>
             <ChangePassword/>
             <Button title="Numéros famille" onPress={() => navigation.navigate('FamilyNumbersPage')}/>
