@@ -1,6 +1,6 @@
 import {TextInput} from "react-native";
 
-export default function PasswordInput(props){
+export default function PasswordInput({placeholder, onEndEditing}){
     return (
         <TextInput
             style={{
@@ -15,14 +15,14 @@ export default function PasswordInput(props){
                 marginLeft: "auto",
                 textAlign: "center",
                 marginTop: 20,
-                width: 250,
+                width: 270,
             }}
             placeholderTextColor={"#C7C7CD"}
-            placeholder={props.placeholder}
+            placeholder={placeholder}
             keyboardType="phone-pad"
             maxLength={4}
             returnKeyType="done"
-            onEndEditing={props.onEndEditing}
+            onEndEditing={onEndEditing}
         />
     );
 }

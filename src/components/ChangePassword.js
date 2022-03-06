@@ -1,25 +1,9 @@
 import {useState} from "react";
-import {Modal, Button, StyleSheet, View, Pressable, Text} from "react-native";
+import {Button, View, Pressable, Text} from "react-native";
 import {sendSMS} from "../services/sendSMS";
 import {createMessageSwitchPassword} from "../services/message";
 import PasswordInput from "./PasswordInput";
-
-const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-    },
-    modalView: {
-        margin: 10,
-        borderRadius: 20,
-        padding: 40,
-        alignItems: "center",
-    }
-});
-
-
+import ModalBox from "./ModalBox";
 
 export default function ChangePassword(props) {
     const [oldPassword, setOldPassword] = useState('');
@@ -28,12 +12,8 @@ export default function ChangePassword(props) {
 
     const onValidate = async () => {
         return sendSMS(createMessageSwitchPassword(oldPassword, newPassword))
-            .then(function(){
-                closeModal()
-            })
-            .catch(function(error){
-                console.log(error);
-            });
+            .then(() => closeModal())
+            .catch(() => {});
     }
 
     const closeModal = () => {
@@ -42,19 +22,16 @@ export default function ChangePassword(props) {
 
     return (
         <View>
-            <Modal visible={modalVisible} presentationStyle="overFullScreen">
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Pressable onPress={() => closeModal()}>
-                            <Text style={{textAlign: "right", marginBottom: 20, color: "#007AFF", fontSize: 16}}>Annuler</Text>
-                        </Pressable>
-                        <PasswordInput placeholder="Ancien" onEndEditing={({nativeEvent: {text}}) => setOldPassword(text)}/>
-                        <PasswordInput placeholder="Nouveau" onEndEditing={({nativeEvent: {text}}) => setNewPassword(text)}/>
-                        <Button title="Valider" onPress={onValidate}/>
-                    </View>
-                </View>
-            </Modal>
-            <Button title="Définir le mot de passe" onPress={async() => await setModalVisible(true)}/>
+            <ModalBox visible={modalVisible}>
+                <Pressable onPress={() => closeModal()}>
+                    <Text style={{textAlign: "right", marginBottom: 20, color: "#007AFF", fontSize: 16}}>Annuler</Text>
+                </Pressable>
+                <Text style={{fontSize: 25, textAlign: "center"}}>Définir un mot de passe{"\n"}pour l’appareil</Text>
+                <PasswordInput placeholder="Ancien mot de passe" onEndEditing={({nativeEvent: {text}}) => setOldPassword(text)}/>
+                <PasswordInput placeholder="Nouveau mot de passe" onEndEditing={({nativeEvent: {text}}) => setNewPassword(text)}/>
+                <Button title="Valider" onPress={onValidate}/>
+            </ModalBox>
+            <Button title="Définir un mot de passe pour l’appareil" onPress={async() => await setModalVisible(true)}/>
         </View>
     );
 }

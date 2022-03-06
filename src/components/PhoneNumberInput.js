@@ -15,7 +15,7 @@ export default function PhoneNumberInput(props){
                 marginLeft: "auto",
                 textAlign: "center",
                 marginTop: 20,
-                width: 250,
+                width: 270,
             }}
             placeholder={"Numéro"}
             keyboardType="phone-pad"

@@ -1,61 +1,10 @@
-import {View, StyleSheet, Modal, Text, TextInput, Button, Pressable} from "react-native";
+import {View, Text, Button, Pressable} from "react-native";
 import {useState} from "react";
 import {sendSMS} from "../services/sendSMS";
 import {createMessageResetToFactorySettings} from "../services/message";
 import localStorage from "../services/localStorage";
-
-const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 22
-    },
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-    },
-    button: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2
-    },
-    buttonOpen: {
-        backgroundColor: "#F194FF",
-    },
-    buttonClose: {
-        backgroundColor: "#2196F3",
-    },
-    textStyle: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: "center",
-        fontSize: 16
-    },
-    inputText: {
-        fontSize: 20,
-        padding: 5,
-        marginBottom: 20,
-        width: 200,
-        borderColor: "#000000",
-        borderWidth: 1
-    }
-});
+import ModalBox from "./ModalBox";
+import PasswordInput from "./PasswordInput";
 
 export default function ResetDefaultFactory(){
     const [modalVisible, setModalVisible] = useState(false);
@@ -69,30 +18,13 @@ export default function ResetDefaultFactory(){
 
     return (
         <View>
-            <Modal
-                animationType="none"
-                visible={modalVisible}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Pressable onPress={() => setModalVisible(false)}>
-                            <Text style={{textAlign: "right", marginBottom: 20, color: "#007AFF", fontSize: 16}}>Fermer</Text>
-                        </Pressable>
-                        <Text style={styles.modalText}>Quel est le mot de passe de l’appareil Simpal ?</Text>
-                        <TextInput
-                            placeholder=""
-                            placeholderTextColor="#000000"
-                            keyboardType="numeric"
-                            returnKeyType="done"
-                            onEndEditing={({nativeEvent: {text}}) => onConfirmResetDefaultFactory(text)}
-                            clearTextOnFocus={true}
-                            style={styles.inputText}
-                            autoCorrect={false}
-                            maxLength={4}
-                        />
-                    </View>
-                </View>
-            </Modal>
+            <ModalBox visible={modalVisible}>
+                <Pressable onPress={() => setModalVisible(false)}>
+                    <Text style={{textAlign: "right", marginBottom: 20, color: "#007AFF", fontSize: 16}}>Annuler</Text>
+                </Pressable>
+                <Text style={{fontSize: 25, textAlign: "center"}}>Mot de passe de l’appareil</Text>
+                <PasswordInput placeholder={"Mot de passe"} onEndEditing={({nativeEvent: {text}}) => onConfirmResetDefaultFactory(text)}/>
+            </ModalBox>
             <Button title="Réinitialiser l’appareil Simpal" onPress={() => setModalVisible(true)}/>
         </View>
     );
