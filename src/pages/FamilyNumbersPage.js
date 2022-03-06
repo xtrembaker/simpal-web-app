@@ -4,10 +4,11 @@ import {
     createMessageAddFamilyNumber, createMessageDeleteAllFamilyNumber,
     createMessageDeleteFamilyNumber, createMessageListAllFamilyNumbers,
 } from "../services/message";
-import SwitchFamilyNumberAlert from "../components/SwitchFamilyNumberAlert";
 import {useEffect, useState} from "react";
 import localStorage from "../services/localStorage";
 import mainStyle from "../styles/main";
+import SwitchButton from "../components/SwitchButton";
+import { getCurrentValue as familyAlertGetValue, onSwitchFamilyNumberAlert } from "../services/familyNumberService";
 
 const styles = StyleSheet.create({
     input: {
@@ -102,7 +103,7 @@ export default function FamilyNumbersPage(){
 
     return (
         <View style={mainStyle.pageContainer}>
-            <SwitchFamilyNumberAlert />
+            <SwitchButton onValueChange={onSwitchFamilyNumberAlert} text={"Activer les alertes famille"} value={familyAlertGetValue}/>
             {phoneNumberInputs.map(({id}) => {
                 return (
                     <View key={id}>

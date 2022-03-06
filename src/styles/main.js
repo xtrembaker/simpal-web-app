@@ -6,5 +6,13 @@ export default StyleSheet.create({
         borderWidth: 0,
         borderColor: "green",
         height: "100%"
+    },
+    switchButtonContainer: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20
     }
 });
