@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
 const STORAGE_KEY = 'externalProbeTemperatureAlert';
 
 export default function RangeTemperatureExternalProbeAlert({min, max}){
-    const [minSelectedValue, setMinSelectedValue] = useState(15);
-    const [maxSelectedValue, setMaxSelectedValue] = useState(20);
+    const [minSelectedValue, setMinSelectedValue] = useState(min);
+    const [maxSelectedValue, setMaxSelectedValue] = useState(max);
     const [rangeTemperatureAlertValue, setRangeTemperatureValue] = useState(false);
     useEffect(() => {
         localStorage().getItem(STORAGE_KEY).then((value) => {
