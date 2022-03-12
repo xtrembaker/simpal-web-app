@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 const STORAGE_KEY = 'internalProbeTemperatureAlert';
 
-export default function RangeTemperatureInternalProbeAlert(){
+export default function RangeTemperatureInternalProbeAlert({min, max}){
     const [minSelectedValue, setMinSelectedValue] = useState(20);
     const [maxSelectedValue, setMaxSelectedValue] = useState(30);
     const [rangeTemperatureAlertValue, setRangeTemperatureValue] = useState(false);
@@ -73,8 +73,8 @@ export default function RangeTemperatureInternalProbeAlert(){
             <Text style={styles.text}>Température minimum : {minSelectedValue}</Text>
             <Text style={styles.text}>Température maximum : {maxSelectedValue}</Text>
             <MultiSlider
-                min={-10}
-                max={50}
+                min={min}
+                max={max}
                 values={[minSelectedValue, maxSelectedValue]}
                 showSteps={true}
                 onValuesChange={([min, max]) => { setMinSelectedValue(min); setMaxSelectedValue(max)}}

@@ -8,7 +8,7 @@ export default function InternalProbePage(){
     return (
         <View style={mainStyle.pageContainer}>
             <Button onPress={async() => { await sendSMS(createMessageGetTemperature())}} title="Obtenir la temperature de la sonde"></Button>
-            <RangeTemperatureInternalProbeAlert />
+            <RangeTemperatureInternalProbeAlert min={-10} max={30}/>
         </View>
     )
 }
